@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CadastroClientes.View.ClientesView"
+              xmlns:local="clr-namespace:CadastroClientes.ViewModel"
+              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Title="Clientes">
+
+    <!--<ContentPage.Behaviors>
+        <toolkit:EventToComandBehavior Command="{Binding GetClientesCommand}" EventName="Appearing"/>
+    </ContentPage.Behaviors>-->
+    
+        <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+      
+        <VerticalStackLayout               
+                Grid.RowSpan="5"
+                Grid.ColumnSpan="4">  
+                <ListView x:Name="listViewClientes" 
+                SelectionMode="Single"
+                HasUnevenRows="True"
+                ItemsSource="{Binding listaClientes}"
+                SelectedItem="{Binding ClienteAtual}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout>
+                                    <Label>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span TextColor="White" FontSize="15" Text="Nome: "/>
+                                                <Span TextColor="White" FontSize="15" Text="{Binding Name}"/>
+                                                <Span TextColor="White" FontSize="15" Text=" "/>
+                                                <Span TextColor="White" FontSize="15" Text="{Binding Lastname}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <Label>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span TextColor="White" FontSize="15" Text="Idade: "/>
+                                                <Span TextColor="White" FontSize="15" Text=" "/>
+                                                <Span TextColor="White" FontSize="15" Text="{Binding Age}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <Label>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span TextColor="White" FontSize="15" Text="Endereço: "/>
+                                                <Span TextColor="White" FontSize="15" Text=" "/>
+                                                <Span TextColor="White" FontSize="15" Text="{Binding Address}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            </VerticalStackLayout>
+            
+            <HorizontalStackLayout Grid.Row="5" BackgroundColor="Transparent" Grid.ColumnSpan="3">
+            <Button
+                x:Name="btnAdicionarCliente"
+                BackgroundColor="DarkSeaGreen"
+                BorderColor="LightGrey"
+                BorderWidth="5"
+                Grid.Column="0"
+                Grid.Row="5"
+                Margin="30,20,0,20"
+                CornerRadius="20"
+                HorizontalOptions="StartAndExpand"
+                ImageSource="icon_adicionar.png"
+                Command="{Binding AdicionarClienteCommand}"
+         />
+            <Button
+                x:Name="btnAtualizarCliente"
+                BackgroundColor="LightGoldenrodYellow"
+                BorderColor="LightGrey"
+                BorderWidth="5"
+                Grid.Column="1"
+                Margin="30,20,0,20"
+                Grid.Row="5"
+                CornerRadius="20"
+                HorizontalOptions="StartAndExpand"
+                ImageSource="icon_atualizar.png"
+                Command="{Binding AtualizarClienteCommand}"
+         />
+            <Button
+                x:Name="btnRemoverCliente"
+                BackgroundColor="DarkSalmon"
+                BorderColor="LightGrey"
+                BorderWidth="5"
+                Margin="30,20,0,20"
+                Grid.Column="2"
+                Grid.Row="3"
+                CornerRadius="20"
+                HorizontalOptions="StartAndExpand"
+                ImageSource="icon_remover.png"
+                Command="{Binding RemoverClienteCommand}"/>
+        </HorizontalStackLayout>
+        
+    </Grid>
+</ContentPage>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CadastroClientes.View.CadastroClienteView">
+    <StackLayout VerticalOptions="StartAndExpand" Padding="6" HorizontalOptions="FillAndExpand">
+        <Frame
+     Margin="0,0,0,30"
+     HasShadow="True"
+     CornerRadius="25"
+     HeightRequest="70"
+     BackgroundColor="CornflowerBlue">
+            <Label
+         HorizontalTextAlignment="Center"
+         FontSize="20"
+         VerticalTextAlignment="Center"
+         TextColor="GhostWhite"
+         FontAttributes="Bold"
+         Text="Cadastro de Cliente"></Label>
+        </Frame>
+
+        <StackLayout Margin="0,0,0,0">
+
+            <!--Nome-->
+            <Frame
+                Margin="5,10,0,0"
+                Padding="5"
+                HeightRequest="50">
+                <Entry
+                    HeightRequest="40"
+                     BackgroundColor="White"
+                     FontSize="15" 
+                     TextColor="Black" 
+                     MaxLength="100"
+                     Keyboard="Text"
+                     Placeholder="Nome * "
+                     PlaceholderColor="Gray"
+                     x:Name="txtNome"
+                     Text="{Binding TxtNome}"/>
+            </Frame>
+
+            <!--SobreNome-->
+            <Frame
+                Margin="5,10,0,0"
+                Padding="5"
+                HeightRequest="50">
+                <Entry
+                    HeightRequest="40"
+                    BackgroundColor="White"
+                    FontSize="15" 
+                    TextColor="Black" 
+                    MaxLength="150"
+                    Keyboard="Text"
+                    Placeholder="Sobrenome * "
+                    PlaceholderColor="Gray"
+                    x:Name="txtSobreNome"
+                    Text="{Binding TxtSobreNome}"/>
+            </Frame>
+
+            <!--Idade-->
+            <Frame
+                Grid.Column="1"
+                Margin="-290,10,0,0"
+                WidthRequest="100"
+                HeightRequest="50">
+                <Entry
+                    HeightRequest="40"
+                    Margin="-15,0,0,0"
+                    HorizontalTextAlignment="Center"
+                    BackgroundColor="White"
+                    FontSize="15"
+                    TextColor="Black" 
+                    MaxLength="3"
+                    Keyboard="Numeric"
+                    Placeholder="Idade * "
+                    PlaceholderColor="Gray"
+                    x:Name="txtIdade"
+                    Text="{Binding TxtIdade}"/>
+            </Frame>
+
+            <!--Endereco-->
+            <Frame
+            Margin="5,10,0,0"
+            Padding="5"
+            HeightRequest="50">
+                <Entry
+                HeightRequest="40"
+                BackgroundColor="White"
+                FontSize="15" 
+                TextColor="Black" 
+                MaxLength="150"
+                Keyboard="Text"
+                Placeholder="Endereço * "
+                PlaceholderColor="Gray"
+                x:Name="txtEndereco"
+                Text="{Binding TxtEndereco}"/>
+            </Frame>
+
+        </StackLayout>
+
+        <!--BOTOES-->
+        <StackLayout Orientation="Horizontal" Margin="0,0,0,0">
+            <Button	
+      HorizontalOptions="StartAndExpand"
+      BackgroundColor="CornflowerBlue"
+      BorderColor="WhiteSmoke"
+      VerticalOptions="StartAndExpand"
+      CornerRadius="30"
+      TextColor="GhostWhite"
+      FontAttributes="Bold"
+      Text="Limpar"
+      Margin="10,20,0,20"
+      ImageSource="icon_limpar.png"
+      Command="{Binding LimparEntrysCommand}">
+            </Button>
+
+            <Button	      
+      BackgroundColor="CornflowerBlue"
+      BorderColor="WhiteSmoke"
+      CornerRadius="30"
+      Margin="30,20,10,20"
+      TextColor="GhostWhite"
+      FontAttributes="Bold"
+      ImageSource="icon_salvar.png"
+      Text="Salvar" 
+      x:Name="btnIncluir"
+      Command="{Binding SalvarClienteCommand}">
+            </Button>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

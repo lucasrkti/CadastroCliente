@@ -5,33 +5,30 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Windows.Input;
+using IPopupService = CadastroClientes.Services.IPopupService;
 
 namespace CadastroClientes.ViewModel
 {
     public partial class ClienteViewModel : ObservableObject
     {
         private readonly IClienteService _clienteService;
-
+        private readonly IPopupService _popUpService;
         public ObservableCollection<Cliente> listaClientes { get; set; } = new();
         public List<string> listEntrysPreenchidas = new List<string>();
-        Cliente csCliente = new Cliente();
-
-        public ClienteViewModel(IClienteService clienteService) // MANTER PARA CARREGAR OS CLIENTES DO BANCO AO INICIAR O APP?
+        public ClienteViewModel(IClienteService clienteService, IPopupService popupService) // MANTER PARA CARREGAR OS CLIENTES DO BANCO AO INICIAR O APP?
         {
             _clienteService = clienteService;
-            
+             _popUpService = popupService;
         }
-
         #region Vinculações Entrys
-        [ObservableProperty]
-        private List<Cliente> _clientes;
+        //[ObservableProperty]
+        //private List<Cliente> _clientes;
 
         [ObservableProperty]
         private Cliente clienteAtual;
         #endregion
 
-
-        #region Commands
 
         [RelayCommand]
         public async Task GetClientes()
@@ -42,7 +39,6 @@ namespace CadastroClientes.ViewModel
             {
                 await _clienteService.InitializeAsync();
                 var clientes = await _clienteService.GetClientes();
-
                 if (clientes.Count > 0)
                     foreach (var cliente in clientes)
                     {
@@ -53,14 +49,14 @@ namespace CadastroClientes.ViewModel
             }
             catch (Exception ex)
             {
-                await Shell.Current.DisplayAlert("Error", "" + ex.Message, "Ok");
+                //await Shell.Current.DisplayAlert("Error", "" + ex.Message, "Ok");
             }
         }
 
         [RelayCommand]
         public async Task AdicionarCliente()
         {
-            await Shell.Current.Navigation.PushAsync(new CadastroClienteView(_clienteService));
+          _popUpService.ShowPopup(new CadastroClienteView(_clienteService));
         }
 
         [RelayCommand]
@@ -68,7 +64,7 @@ namespace CadastroClientes.ViewModel
         {
             if (ClienteAtual != null)
             {
-                await Shell.Current.Navigation.PushAsync(new AtualizarClienteView(clienteAtual, _clienteService));
+                _popUpService.ShowPopup(new AtualizarClienteView(clienteAtual, _clienteService));
             }
             else
             {
@@ -99,7 +95,6 @@ namespace CadastroClientes.ViewModel
 
         }
 
-        #endregion
 
         #region  Métodos
 

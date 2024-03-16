@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CadastroClientes.View.AtualizarClienteView"    >
-    <StackLayout VerticalOptions="StartAndExpand" Padding="6" HorizontalOptions="FillAndExpand">
+             x:Class="CadastroClientes.View.AtualizarClienteView"  
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui">
+    <StackLayout  VerticalOptions="StartAndExpand" Padding="6" HorizontalOptions="FillAndExpand">
         <Frame
      Margin="0,0,0,30"
      HasShadow="True"
@@ -18,14 +19,14 @@
          Text="Atualizar Cliente"></Label>
         </Frame>
 
-        <StackLayout Margin="0,0,0,0">
+        <StackLayout VerticalOptions="StartAndExpand" Padding="6" HorizontalOptions="FillAndExpand" Margin="0,0,0,0">
 
             <!--ID-->
             <Label Padding="30,10,0,-5" Text="I D "></Label>
             <Frame
-         Margin="-315,10,0,0"
-         WidthRequest="70"
-         HeightRequest="50">
+             Margin="-153,10,0,0"
+             WidthRequest="70"
+             HeightRequest="50">
                 <Entry
               HeightRequest="40"
               BackgroundColor="White"
@@ -76,10 +77,9 @@
 
             <!--Idade-->
             <Frame
-                Grid.Column="1"
-                Margin="-290,10,0,0"
-                WidthRequest="100"
-                HeightRequest="50">
+                Margin="-115,10,0,0"
+                 WidthRequest="100"
+                 HeightRequest="50">
                 <Entry
                     HeightRequest="40"
                     Margin="-15,0,0,0"
@@ -126,7 +126,16 @@
       ImageSource="icon_cliente_atualizado.png"
       Text="Atualizar" 
       x:Name="btnAtualizar"
+      IsEnabled="{Binding HabilitarBtnAtualizar}"
       Command="{Binding AtualizarClienteCommand}">
             </Button>
-        </StackLayout>
-</ContentPage>
+
+        <Button Text="X" TextColor="Black"
+        BackgroundColor="Salmon"
+        FontAttributes="Bold"
+        WidthRequest="50"
+        HeightRequest="50"
+        Margin="8,0,0,0"
+        Clicked="Button_Clicked"></Button>
+    </StackLayout>
+</mct:Popup>

@@ -1,6 +1,5 @@
 ﻿using CadastroClientes.Model;
 using CadastroClientes.Services;
-using CadastroClientes.View;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Text;
@@ -35,6 +34,8 @@ namespace CadastroClientes.ViewModel
         string? txtIdade;
         [ObservableProperty]
         string? txtEndereco;
+        [ObservableProperty]
+        bool habilitarBtnAtualizar = true;
         #endregion
 
         #region Commands
@@ -65,8 +66,9 @@ namespace CadastroClientes.ViewModel
                     csCliente.Address = string.IsNullOrEmpty(TxtEndereco) ? string.Empty : TxtEndereco.Trim();
 
                     await _clienteService.AtualizaCliente(csCliente);
-
+                    await _clienteService.AtualizaViewCliente(csCliente);
                     await Shell.Current.Navigation.PopAsync();
+                    HabilitarBtnAtualizar = false;
                 }
             }
             #endregion

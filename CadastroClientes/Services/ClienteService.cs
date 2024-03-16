@@ -1,4 +1,5 @@
 ﻿using CadastroClientes.Model;
+using CadastroClientes.View;
 using SQLite;
 
 namespace CadastroClientes.Services
@@ -17,7 +18,7 @@ namespace CadastroClientes.Services
             if (_dbConnection == null)
             {
                 string dbPath = Path.Combine(Environment.
-                GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ClienteDB.db3"); // obtem o caminho na pasta de dados do usuario atual e dfine o nome do banco
+                GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ClienteDB.db3"); // obtem o caminho na pasta de dados do usuario atual e define o nome do banco
 
                 _dbConnection = new SQLiteAsyncConnection(dbPath); // nova instancia do sql
                 await _dbConnection.CreateTableAsync<Cliente>(); // cria a tabela Cliente... se ja existir nao faz nada
@@ -56,6 +57,11 @@ namespace CadastroClientes.Services
                 throw new ArgumentNullException(nameof(cliente));
 
             return await _dbConnection.DeleteAsync(cliente);
+        }
+
+        public async Task AtualizaViewCliente(Cliente cliente)
+        {
+             await Shell.Current.Navigation.PushModalAsync(new ClientesView(null, null));
         }
     }
 }

@@ -2,7 +2,8 @@
 using CadastroClientes.View;
 using CadastroClientes.ViewModel;
 using Microsoft.Extensions.Logging;
-using Microsoft.Maui.Controls.Compatibility.Hosting;
+using CommunityToolkit.Maui;
+using PopupService = CadastroClientes.Services.PopupService;
 
 namespace CadastroClientes
 {
@@ -13,6 +14,7 @@ namespace CadastroClientes
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -22,12 +24,12 @@ namespace CadastroClientes
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+            builder.Services.AddTransient<IPopupService, PopupService>();
+            builder.Services.AddTransientPopup<CadastroClienteView, CadastroClienteViewModel>();
+            builder.Services.AddTransientPopup<AtualizarClienteView, AtualizarClienteViewModel>();
             builder.Services.AddSingleton<IClienteService, ClienteService>();
-            builder.Services.AddSingleton<ClienteViewModel>();
-            builder.Services.AddSingleton<AtualizarClienteViewModel>();
-
-            builder.Services.AddSingleton<ClientesView>();
-            builder.Services.AddSingleton<AtualizarClienteView>();
+            builder.Services.AddTransient<ClienteViewModel>();
+            builder.Services.AddTransient<ClientesView>();
 
             return builder.Build();
         }

@@ -1,6 +1,5 @@
 ﻿using CadastroClientes.Model;
 using CadastroClientes.Services;
-using CadastroClientes.View;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Text;
@@ -16,7 +15,7 @@ namespace CadastroClientes.ViewModel
         {
             _clienteService = clienteService;
         }
-
+       
         #region Vinculações Entrys
         [ObservableProperty]
         string? txtNome;
@@ -69,8 +68,9 @@ namespace CadastroClientes.ViewModel
                     csCliente.Address = string.IsNullOrEmpty(TxtEndereco) ? string.Empty : TxtEndereco.Trim();
 
                     await _clienteService.AdicionaCliente(csCliente);
-
+                    await _clienteService.AtualizaViewCliente(csCliente);
                     await Shell.Current.Navigation.PopAsync();
+                    HabilitarBtnSalvar = false;
                 }
             }
             #endregion

@@ -1,9 +1,4 @@
 ﻿using CadastroClientes.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CadastroClientes.Services
 {
@@ -15,5 +10,6 @@ namespace CadastroClientes.Services
         Task<int> AdicionaCliente(Cliente cliente);
         Task<int> AtualizaCliente(Cliente cliente);
         Task<int> DeletaCliente(Cliente cliente);
+        Task AtualizaViewCliente(Cliente cliente);
     }
 }

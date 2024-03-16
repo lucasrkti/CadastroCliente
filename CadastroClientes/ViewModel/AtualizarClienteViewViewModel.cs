@@ -53,23 +53,22 @@ namespace CadastroClientes.ViewModel
             if (entrysVazias.ToString() != string.Empty)
             {
                 await InformarEntryVazia(entrysVazias);
+                return;
             }
-            else
+
+            var strResult = await App.Current.MainPage.DisplayActionSheet("Confirma a atualização do cliente?", "Confirmar", "Cancelar");
+
+            if (strResult == "Confirmar")
             {
-                var strResult = await App.Current.MainPage.DisplayActionSheet("Confirma a atualização do cliente?", "Confirmar", "Cancelar");
+                csCliente.Name = string.IsNullOrEmpty(TxtNome) ? string.Empty : TxtNome.Trim();
+                csCliente.Lastname = string.IsNullOrEmpty(TxtSobreNome) ? string.Empty : TxtSobreNome.Trim();
+                csCliente.Age = string.IsNullOrEmpty(TxtIdade) ? string.Empty : TxtIdade.Trim();
+                csCliente.Address = string.IsNullOrEmpty(TxtEndereco) ? string.Empty : TxtEndereco.Trim();
 
-                if (strResult == "Confirmar")
-                {
-                    csCliente.Name = string.IsNullOrEmpty(TxtNome) ? string.Empty : TxtNome.Trim();
-                    csCliente.Lastname = string.IsNullOrEmpty(TxtSobreNome) ? string.Empty : TxtSobreNome.Trim();
-                    csCliente.Age = string.IsNullOrEmpty(TxtIdade) ? string.Empty : TxtIdade.Trim();
-                    csCliente.Address = string.IsNullOrEmpty(TxtEndereco) ? string.Empty : TxtEndereco.Trim();
-
-                    await _clienteService.AtualizaCliente(csCliente);
-                    await _clienteService.AtualizaViewCliente(csCliente);
-                    await Shell.Current.Navigation.PopAsync();
-                    HabilitarBtnAtualizar = false;
-                }
+                await _clienteService.AtualizaCliente(csCliente);
+                await _clienteService.AtualizaViewCliente(csCliente);
+                await Shell.Current.Navigation.PopAsync();
+                HabilitarBtnAtualizar = false;
             }
             #endregion
         }

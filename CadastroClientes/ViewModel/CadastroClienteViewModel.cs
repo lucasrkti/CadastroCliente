@@ -34,7 +34,6 @@ namespace CadastroClientes.ViewModel
         bool habilitarSemana = true;
         [ObservableProperty]
         bool habilitarBtnSalvar = true;
-
         #endregion
 
         #region Commands
@@ -55,26 +54,25 @@ namespace CadastroClientes.ViewModel
             if (entrysVazias.ToString() != string.Empty) //  NAO ESQUECER - RETIRADO PARA RESTES  != 
             {
                 await InformarEntryVazia(entrysVazias);
+                return;
             }
-            else
+
+            var strResult = await App.Current.MainPage.DisplayActionSheet("Deseja salvar o cliente?", "Confirmar", "Cancelar");
+
+            if (strResult == "Confirmar")
             {
-                var strResult = await App.Current.MainPage.DisplayActionSheet("Deseja salvar o cliente?", "Confirmar", "Cancelar");
+                csCliente.Name = string.IsNullOrEmpty(TxtNome) ? string.Empty : TxtNome.Trim();
+                csCliente.Lastname = string.IsNullOrEmpty(TxtSobreNome) ? string.Empty : TxtSobreNome.Trim();
+                csCliente.Age = string.IsNullOrEmpty(TxtIdade) ? string.Empty : TxtIdade.Trim();
+                csCliente.Address = string.IsNullOrEmpty(TxtEndereco) ? string.Empty : TxtEndereco.Trim();
 
-                if (strResult == "Confirmar")
-                {
-                    csCliente.Name = string.IsNullOrEmpty(TxtNome) ? string.Empty : TxtNome.Trim();
-                    csCliente.Lastname = string.IsNullOrEmpty(TxtSobreNome) ? string.Empty : TxtSobreNome.Trim();
-                    csCliente.Age = string.IsNullOrEmpty(TxtIdade) ? string.Empty : TxtIdade.Trim();
-                    csCliente.Address = string.IsNullOrEmpty(TxtEndereco) ? string.Empty : TxtEndereco.Trim();
-
-                    await _clienteService.AdicionaCliente(csCliente);
-                    await _clienteService.AtualizaViewCliente(csCliente);
-                    await Shell.Current.Navigation.PopAsync();
-                    HabilitarBtnSalvar = false;
-                }
+                await _clienteService.AdicionaCliente(csCliente);
+                await _clienteService.AtualizaViewCliente(csCliente);
+                await Shell.Current.Navigation.PopAsync();
+                HabilitarBtnSalvar = false;
             }
-            #endregion
         }
+            #endregion
 
         #region  Métodos
         public async Task InformarEntryVazia(StringBuilder entrys) => await Shell.Current.DisplayAlert("Favor Preencher: \n", "\n" + entrys, "Ok");

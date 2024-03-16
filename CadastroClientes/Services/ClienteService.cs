@@ -18,10 +18,10 @@ namespace CadastroClientes.Services
             if (_dbConnection == null)
             {
                 string dbPath = Path.Combine(Environment.
-                GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ClienteDB.db3"); // obtem o caminho na pasta de dados do usuario atual e define o nome do banco
+                GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ClienteDB.db3");
 
-                _dbConnection = new SQLiteAsyncConnection(dbPath); // nova instancia do sql
-                await _dbConnection.CreateTableAsync<Cliente>(); // cria a tabela Cliente... se ja existir nao faz nada
+                _dbConnection = new SQLiteAsyncConnection(dbPath);
+                await _dbConnection.CreateTableAsync<Cliente>();
             }
         }
 

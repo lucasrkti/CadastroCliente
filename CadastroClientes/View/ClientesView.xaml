@@ -5,9 +5,12 @@
               xmlns:local="clr-namespace:CadastroClientes.ViewModel"
               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:mct="clr-namespace:CommunityToolkit.Maui.Core.Views;assembly=CommunityToolkit.Maui.Core"
-             Title="Clientes">
+             Title=""
+             Shell.NavBarHasShadow="False">
+    
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="100"></RowDefinition>
         </Grid.RowDefinitions>
@@ -17,8 +20,25 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
+            <Frame
+    WidthRequest="250"
+    Margin="0,0,0,30"
+    Grid.Column="1"
+    HasShadow="True"
+    CornerRadius="25"
+    HeightRequest="70"
+    BackgroundColor="CornflowerBlue">
+            <Label
+        HorizontalTextAlignment="Center"
+        FontSize="20"
+        VerticalTextAlignment="Center"
+        TextColor="GhostWhite"
+        FontAttributes="Bold"
+        Text="Clientes"></Label>
+        </Frame>
+
         <ScrollView
-                Grid.Row="0"
+                Grid.Row="1"
                 Grid.ColumnSpan="3">
             <CollectionView x:Name="listViewClientes" 
                 SelectionMode="Single"
@@ -38,31 +58,20 @@
                                 <Label>
                                     <Label.FormattedText>
                                         <FormattedString>
-                                            <Span TextColor="White" FontSize="15" Text="Id: "/>
-                                            <Span TextColor="White" FontSize="15" Text="{Binding Id}"/>
-                                            <Span TextColor="White" FontSize="15" Text=" "/>
+                                            <Span TextColor="#4D4D4D" FontSize="15" Text="Id: "/>
+                                            <Span TextColor="#4D4D4D" FontSize="15" Text="{Binding Id}"/>
+                                            <Span TextColor="#4D4D4D" FontSize="15" Text=" "/>
                                         </FormattedString>
                                     </Label.FormattedText>
                                 </Label>
                                 <Label>
                                     <Label.FormattedText>
                                         <FormattedString>
-                                            <Span TextColor="White" FontSize="15" Text="Nome: "/>
-                                            <Span TextColor="White" FontSize="15" Text="{Binding Name}"/>
-                                            <Span TextColor="White" FontSize="15" Text=" "/>
-                                            <Span TextColor="White" FontSize="15" Text="{Binding Lastname}"/>
-                                            <Span TextColor="White" FontSize="15" Text=" "/>
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
-
-                                <Label>
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span TextColor="White" FontSize="15" Text="Idade: "/>
-                                            <Span TextColor="White" FontSize="15" Text=" "/>
-                                            <Span TextColor="White" FontSize="15" Text="{Binding Age}"/>
-                                            <Span TextColor="White" FontSize="15" Text=" "/>
+                                            <Span TextColor="#4D4D4D" FontSize="15" Text="Nome: "/>
+                                            <Span TextColor="#4D4D4D" FontSize="15" Text="{Binding Name}"/>
+                                            <Span Text=" "/>
+                                            <Span TextColor="#4D4D4D" FontSize="15" Text="{Binding Lastname}"/>
+                                            <Span Text=" "/>
                                         </FormattedString>
                                     </Label.FormattedText>
                                 </Label>
@@ -70,9 +79,20 @@
                                 <Label>
                                     <Label.FormattedText>
                                         <FormattedString>
-                                            <Span TextColor="White" FontSize="15" Text="Endereço: "/>
-                                            <Span TextColor="White" FontSize="15" Text=" "/>
-                                            <Span TextColor="White" FontSize="15" Text="{Binding Address}"/>
+                                            <Span TextColor="#4D4D4D" FontSize="15" Text="Idade: "/>
+                                            <Span Text=" "/>
+                                            <Span TextColor="#4D4D4D" FontSize="15" Text="{Binding Age}"/>
+                                            <Span Text=" "/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span TextColor="#4D4D4D" FontSize="15" Text="Endereço: "/>
+                                            <Span Text=" "/>
+                                            <Span TextColor="#4D4D4D" FontSize="15" Text="{Binding Address}"/>
                                         </FormattedString>
                                     </Label.FormattedText>
                                 </Label>

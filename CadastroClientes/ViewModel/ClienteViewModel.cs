@@ -5,7 +5,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Text;
-using System.Windows.Input;
 using IPopupService = CadastroClientes.Services.IPopupService;
 
 namespace CadastroClientes.ViewModel
@@ -16,19 +15,18 @@ namespace CadastroClientes.ViewModel
         private readonly IPopupService _popUpService;
         public ObservableCollection<Cliente> listaClientes { get; set; } = new();
         public List<string> listEntrysPreenchidas = new List<string>();
-        public ClienteViewModel(IClienteService clienteService, IPopupService popupService) // MANTER PARA CARREGAR OS CLIENTES DO BANCO AO INICIAR O APP?
+
+        public ClienteViewModel(IClienteService clienteService, IPopupService popupService) 
         {
             _clienteService = clienteService;
-             _popUpService = popupService;
+            _popUpService = popupService;
         }
+
         #region Vinculações Entrys
-        //[ObservableProperty]
-        //private List<Cliente> _clientes;
 
         [ObservableProperty]
         private Cliente clienteAtual;
         #endregion
-
 
         [RelayCommand]
         public async Task GetClientes()
@@ -67,7 +65,7 @@ namespace CadastroClientes.ViewModel
                 _popUpService.ShowPopup(new AtualizarClienteView(clienteAtual, _clienteService));
             }
             else
-            {
+            { 
                 await App.Current.MainPage.DisplayAlert("Selecione um cliente para atualizar!", "", "Ok");
             }
         }
@@ -94,7 +92,6 @@ namespace CadastroClientes.ViewModel
             }
 
         }
-
 
         #region  Métodos
 
